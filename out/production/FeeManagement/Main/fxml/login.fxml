@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.geometry.Insets?>
+<GridPane xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:controller="Main.Controller.LoginController"
+          fx:id="grid"
+          prefHeight="400.0" prefWidth="600.0" alignment="center" hgap="10" vgap="10"
+          gridLinesVisible="false">
+    <columnConstraints>
+
+    </columnConstraints>
+    <Label fx:id="announcement" GridPane.columnSpan="2" GridPane.columnIndex="1" GridPane.rowIndex="0">
+        <font>
+            <Font name="sans-serif" size="12"/>
+        </font>
+        <GridPane.margin>
+            <Insets left="0"/>
+        </GridPane.margin>
+    </Label>
+    <Label fx:id="nameLabel" text="_Username:" mnemonicParsing="true" GridPane.columnIndex="0" GridPane.rowIndex="1" onMouseClicked="#handleMouseClicks"/>
+    <TextField fx:id="userNameField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+    <Label fx:id="pwLabel" text="_Password: " mnemonicParsing="true" GridPane.columnIndex="0" GridPane.rowIndex="2" onMouseClicked="#handleMouseClicks"/>
+    <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+    <Button fx:id="logInButton" text="Log In" GridPane.halignment="LEFT" GridPane.columnSpan="1" GridPane.columnIndex="1" GridPane.rowIndex="3"
+    onAction="#logIn" />
+    <Button fx:id="SignUpButton" text="Register" GridPane.halignment="LEFT" GridPane.columnSpan="1" GridPane.columnIndex="1" GridPane.rowIndex="4"
+            onAction="#ShowSignUp" />
+</GridPane>

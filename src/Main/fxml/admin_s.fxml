@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Controller.AdminController">
+    <children>
+        <MenuBar VBox.vgrow="NEVER">
+            <menus>
+                <Menu mnemonicParsing="true" text="_File">
+                    <items>
+                        <MenuItem accelerator="Shortcut+E" mnemonicParsing="false" onAction="#newEmp" text="New Employee..." />
+                        <MenuItem accelerator="Shortcut+C" mnemonicParsing="false" onAction="#manageClient" text="Manage Client..." />
+                        <Menu mnemonicParsing="false" text="Open Recent" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="Close" />
+                        <MenuItem mnemonicParsing="false" text="Save" />
+                        <MenuItem mnemonicParsing="false" text="Save As…" />
+                        <MenuItem mnemonicParsing="false" text="Revert" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem accelerator="ShortCut+O" mnemonicParsing="false" onAction="#userLogOut" text="Log Out" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem fx:id="quitMenuItem" accelerator="ShortCut+X" mnemonicParsing="false" onAction="#quitApp" text="Quit" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Undo" />
+                        <MenuItem mnemonicParsing="false" text="Redo" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="Cut" />
+                        <MenuItem mnemonicParsing="false" text="Copy" />
+                        <MenuItem mnemonicParsing="false" text="Paste" />
+                        <MenuItem mnemonicParsing="false" text="Delete" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="Select All" />
+                        <MenuItem mnemonicParsing="false" text="Unselect All" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <SplitPane dividerPositions="0.2505567928730512, 0.5" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+            <items>
+                <VBox maxWidth="-Infinity" prefHeight="549.0" prefWidth="98.0">
+                    <children>
+                        <AnchorPane prefHeight="85.0" prefWidth="98.0">
+                            <children>
+                                <Label alignment="CENTER" layoutX="31.0" layoutY="33.0" text="Set:">
+                                    <font>
+                                        <Font name="SansSerif Bold" size="16.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </AnchorPane>
+                        <HBox fx:id="employeeBox" alignment="CENTER" onMouseClicked="#handleClicks" onMouseEntered="#handleMouseEnter" onMouseExited="#handleMouseExited" prefHeight="100.0" prefWidth="200.0">
+                            <children>
+                                <Label fx:id="empLabel" text="Employees" />
+                            </children>
+                        </HBox>
+                        <HBox fx:id="clientBox" alignment="CENTER" onMouseClicked="#handleClicks" onMouseEntered="#handleMouseEnter" onMouseExited="#handleMouseExited" prefHeight="100.0" prefWidth="200.0">
+                            <children>
+                                <Label fx:id="clientLabel" text="Clients" />
+                            </children>
+                        </HBox>
+                        <HBox fx:id="taskBox" alignment="CENTER" onMouseClicked="#handleClicks" onMouseEntered="#handleMouseEnter" onMouseExited="#handleMouseExited" prefHeight="100.0" prefWidth="200.0">
+                            <children>
+                                <Label fx:id="taskLabel" text="Tasks" />
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+                <StackPane prefHeight="150.0" prefWidth="200.0">
+                    <children>
+                        <BorderPane fx:id="taskPane" prefHeight="200.0" prefWidth="200.0" visible="false">
+                            <center>
+                                <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+                                    <tabs>
+                                        <Tab fx:id="addTaskTab" onSelectionChanged="#TabChanged" text="Add Tasks">
+                                 <content>
+                                    <BorderPane prefHeight="200.0" prefWidth="200.0">
+                                       <center>
+                                          <GridPane hgap="10.0" prefHeight="426.0" prefWidth="597.0" vgap="10.0" BorderPane.alignment="CENTER">
+                                            <columnConstraints>
+                                              <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                              <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints maxHeight="109.0" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES" />
+                                              <RowConstraints maxHeight="149.0" minHeight="10.0" prefHeight="87.0" vgrow="SOMETIMES" />
+                                              <RowConstraints maxHeight="182.0" minHeight="10.0" prefHeight="104.0" valignment="TOP" vgrow="SOMETIMES" />
+                                              <RowConstraints maxHeight="133.0" minHeight="10.0" prefHeight="53.0" valignment="TOP" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="86.0" minHeight="10.0" prefHeight="50.0" valignment="TOP" vgrow="NEVER" />
+                                                <RowConstraints maxHeight="65.0" minHeight="0.0" prefHeight="43.0" valignment="TOP" vgrow="NEVER" />
+                                                <RowConstraints maxHeight="94.0" minHeight="10.0" prefHeight="61.0" valignment="TOP" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <children>
+                                                <Label text="Task's Name: " GridPane.rowIndex="1">
+                                                   <GridPane.margin>
+                                                      <Insets left="35.0" />
+                                                   </GridPane.margin>
+                                                </Label>
+                                                <TextField fx:id="taskNameField" maxWidth="-Infinity" prefHeight="26.0" prefWidth="180.0" promptText="name..." GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                   <GridPane.margin>
+                                                      <Insets left="-30.0" />
+                                                   </GridPane.margin>
+                                                </TextField>
+                                                <Label text="Description: " GridPane.rowIndex="2">
+                                                   <GridPane.margin>
+                                                      <Insets left="35.0" />
+                                                   </GridPane.margin>
+                                                </Label>
+                                                <Label text="Client: " GridPane.rowIndex="4">
+                                                   <GridPane.margin>
+                                                      <Insets left="35.0" />
+                                                   </GridPane.margin>
+                                                </Label>
+                                                <Label text="Deadline: " GridPane.rowIndex="3">
+                                                   <GridPane.margin>
+                                                      <Insets left="35.0" />
+                                                   </GridPane.margin>
+                                                </Label>
+                                                <DatePicker fx:id="taskDeadlinePicker" prefHeight="26.0" prefWidth="180.0" promptText="add deadine..." GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                                   <GridPane.margin>
+                                                      <Insets left="-30.0" />
+                                                   </GridPane.margin>
+                                                </DatePicker>
+                                                <TextArea fx:id="descripTextArea" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="80.0" prefWidth="180.0" promptText="add description..." style="-fx-border-color: grey; -fx-border-width: 1;" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                   <GridPane.margin>
+                                                      <Insets left="-30.0" />
+                                                   </GridPane.margin>
+                                                </TextArea>
+                                                <ChoiceBox fx:id="clientChoiceBox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="180.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                                   <GridPane.margin>
+                                                      <Insets left="-30.0" />
+                                                   </GridPane.margin>
+                                                </ChoiceBox>
+                                                <Button fx:id="addTaskBtn" alignment="CENTER" maxWidth="-Infinity" mnemonicParsing="false" onAction="#addTask" prefHeight="26.0" prefWidth="90.0" text="Add Task" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="5" GridPane.valignment="TOP">
+                                                   <GridPane.margin>
+                                                      <Insets left="-30.0" />
+                                                   </GridPane.margin>
+                                                </Button>
+                                             </children>
+                                          </GridPane>
+                                       </center>
+                                       <left>
+                                          <VBox prefHeight="516.0" prefWidth="100.0" style="-fx-background-color: grey;" BorderPane.alignment="CENTER">
+                                             <BorderPane.margin>
+                                                <Insets bottom="10.0" top="10.0" />
+                                             </BorderPane.margin>
+                                          </VBox>
+                                       </left>
+                                       <right>
+                                          <VBox prefHeight="516.0" prefWidth="111.0" style="-fx-background-color: grey;" BorderPane.alignment="CENTER">
+                                             <opaqueInsets>
+                                                <Insets />
+                                             </opaqueInsets>
+                                             <BorderPane.margin>
+                                                <Insets bottom="10.0" top="10.0" />
+                                             </BorderPane.margin>
+                                          </VBox>
+                                       </right>
+                                       <top>
+                                          <HBox alignment="CENTER" prefHeight="35.0" prefWidth="597.0" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <Label fx:id="addTaskPrompt" alignment="CENTER" text="Please fill in:" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font name="SansSerif Italic" size="15.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                       </top>
+                                       <bottom>
+                                          <HBox prefHeight="29.0" prefWidth="597.0" BorderPane.alignment="CENTER" />
+                                       </bottom>
+                                    </BorderPane>
+                                 </content></Tab>
+                                        <Tab fx:id="searchTaskTab" text="Search" onSelectionChanged="#TabChanged">
+                                 <content>
+                                    <BorderPane prefHeight="200.0" prefWidth="200.0">
+                                       <top>
+                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <TextField fx:id="searchTaskField" layoutX="16.0" layoutY="48.0" onAction="#searchTask" promptText="search..." style="-fx-background-color: grey; -fx-font-size: 14; -fx-font-weight: bold; -fx-text-fill: white" />
+                                                <VBox fx:id="seachVBox1" layoutX="16.0" layoutY="91.0" prefHeight="415.0" prefWidth="570.0">
+                                                   <children>
+                                                      <TableView fx:id="searchTaskTable" prefHeight="383.0" prefWidth="570.0">
+                                                         <columns>
+                                                            <TableColumn fx:id="searchTaskNameColumn" prefWidth="75.0" text="Name">
+                                                               <cellValueFactory>
+                                                                  <PropertyValueFactory property="name" />
+                                                               </cellValueFactory>
+                                                            </TableColumn>
+                                                            <TableColumn fx:id="searchTaskClientColumn" prefWidth="75.0" text="Client">
+                                                               <cellValueFactory>
+                                                                  <PropertyValueFactory property="client" />
+                                                               </cellValueFactory>
+                                                            </TableColumn>
+                                                            <TableColumn fx:id="searchTaskDeadlineColumn" prefWidth="104.0" text="Deadline">
+                                                               <cellValueFactory>
+                                                                  <PropertyValueFactory property="deadline" />
+                                                               </cellValueFactory>
+                                                            </TableColumn>
+                                                            <TableColumn prefWidth="75.0" text="Fee">
+                                                                <cellValueFactory>
+                                                                    <PropertyValueFactory property="fee"/>
+                                                                </cellValueFactory>
+
+                                                            </TableColumn>
+                                                            <TableColumn fx:id="searchTaskAssignedColumn" prefWidth="139.0" text="No. of Applicants">
+                                                               <cellValueFactory>
+                                                                  <PropertyValueFactory property="numOfPendingEmps" />
+                                                               </cellValueFactory>
+                                                            </TableColumn>
+                                                             <TableColumn fx:id="taskCompleteColumn" prefWidth="97.0" text="Completed" >
+                                                                 <cellValueFactory>
+                                                                     <PropertyValueFactory property="done"/>
+                                                                 </cellValueFactory>
+                                                             </TableColumn>
+                                                         </columns>
+                                                      </TableView>
+                                                   </children>
+                                                </VBox>
+                                                <Button fx:id="searchTaskBtn" alignment="CENTER" layoutX="228.0" layoutY="49.0" mnemonicParsing="false" onAction="#searchTask" style="-fx-background-color: grey; -fx-text-fill: white;" text="Enter" />
+                                                <Label layoutX="22.0" layoutY="19.0" text="Type: " />
+                                                <fx:define>
+                                                    <ToggleGroup fx:id="searchTaskTypeGroup"/>
+                                                </fx:define>
+                                                <RadioButton fx:id="assignedRadio" layoutX="77.0" layoutY="18.0" mnemonicParsing="false" text="Assigned" toggleGroup="$searchTaskTypeGroup" selected="true"/>
+                                                <RadioButton fx:id="unassignedRadio" layoutX="181.0" layoutY="18.0" mnemonicParsing="false" text="Unassigned" toggleGroup="$searchTaskTypeGroup"/>
+                                             </children>
+                                          </AnchorPane>
+                                       </top>
+                                    </BorderPane>
+                                 </content>
+                                        </Tab>
+                                    </tabs>
+                                </TabPane>
+                            </center>
+                        </BorderPane>
+                        <BorderPane fx:id="empPane" prefHeight="200.0" prefWidth="200.0" visible="true">
+                            <center>
+                                <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+                                    <tabs>
+                                        <Tab text="Pending">
+                                            <content>
+                                                <BorderPane prefHeight="200.0" prefWidth="200.0">
+                                                    <center>
+                                                        <TableView fx:id="pendingTable" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                                        <columns>
+                                                            <TableColumn prefWidth="146.0" text="Employee">
+                                                                <cellValueFactory>
+                                                                    <PropertyValueFactory property="name" />
+                                                                </cellValueFactory>
+                                                            </TableColumn>
+
+                                                            <TableColumn prefWidth="142.0" text="Email">
+                                                                <cellValueFactory>
+                                                                    <PropertyValueFactory property="email" />
+                                                                </cellValueFactory>
+                                                            </TableColumn>
+                                                            <TableColumn prefWidth="117.0" text="Skills">
+                                                                <cellValueFactory>
+                                                                    <PropertyValueFactory property="skills" />
+                                                                </cellValueFactory>
+                                                            </TableColumn>
+                                                            <TableColumn prefWidth="205.0" text="Sign-Up Date">
+                                                                <cellValueFactory>
+                                                                    <PropertyValueFactory property="date" />
+                                                                </cellValueFactory>
+                                                            </TableColumn>
+                                                        </columns>
+                                                        </TableView>
+
+                                                    </center>
+                                                </BorderPane>
+                                            </content>
+                                        </Tab>
+                                        <Tab fx:id="searchTab" onSelectionChanged="#TabChanged" text="Search">
+                                            <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TextField fx:id="searchField" layoutX="16.0" layoutY="48.0" onAction="#searchEmployees" promptText="search..." style="-fx-background-color: grey; -fx-font-size: 14; -fx-font-weight: bold; -fx-text-fill: white" />
+                                          <CheckBox fx:id="approvedCheckBox" layoutX="16.0" layoutY="21.0" mnemonicParsing="false" onAction="#toggleApprove" text="Approved Only" />
+                                          <CheckBox fx:id="onTasksCheckBox" layoutX="146.0" layoutY="21.0" mnemonicParsing="false" text="on Tasks" />
+                                          <VBox fx:id="seachVBox" layoutX="16.0" layoutY="91.0" prefHeight="415.0" prefWidth="570.0">
+                                             <children>
+                                                <TableView fx:id="empTable" prefHeight="383.0" prefWidth="570.0">
+                                                  <columns>
+                                                    <TableColumn fx:id="searchEmpNameColumn" prefWidth="75.0" text="Name">
+                                                        <cellValueFactory>
+                                                            <PropertyValueFactory property="name" />
+                                                        </cellValueFactory>
+                                                    </TableColumn>
+                                                      <TableColumn fx:id="searchEmailEmpColumn" prefWidth="75.0" text="Email">
+                                                          <cellValueFactory>
+                                                              <PropertyValueFactory property="email" />
+                                                          </cellValueFactory>
+                                                      </TableColumn>
+                                                      <TableColumn prefWidth="75.0" text="Phone Number">
+                                                          <cellValueFactory>
+                                                              <PropertyValueFactory property="phone" />
+                                                          </cellValueFactory>
+                                                      </TableColumn>
+                                                      <TableColumn prefWidth="125.0" text="Skills">
+                                                          <cellValueFactory>
+                                                              <PropertyValueFactory property="skills" />
+                                                          </cellValueFactory>
+                                                      </TableColumn>
+                                                      <TableColumn prefWidth="75.0" text="Sign-Up Date">
+                                                          <cellValueFactory>
+                                                              <PropertyValueFactory property="date" />
+                                                          </cellValueFactory>
+                                                      </TableColumn>
+                                                  </columns>
+                                                </TableView>
+                                             </children>
+                                          </VBox>
+                                          <Button fx:id="searchBtn" alignment="CENTER" layoutX="228.0" layoutY="49.0" mnemonicParsing="false" onAction="#searchEmployees" style="-fx-background-color: grey; -fx-text-fill: white;" text="Enter" />
+                                       </children>
+                                    </AnchorPane>
+                                            </content>
+                                        </Tab>
+                                    </tabs>
+                                </TabPane>
+                            </center>
+                        </BorderPane>
+                    </children>
+                </StackPane>
+                <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="549.0" prefWidth="187.0">
+                    <children>
+                        <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" style="&#10;" text="Dashboard" textAlignment="CENTER" wrapText="false">
+                            <font>
+                                <Font size="18.0" fx:id="x5" />
+                            </font>
+                            <textFill>
+                                <Color blue="0.624" green="0.624" red="0.624" fx:id="x6" />
+                            </textFill>
+                        </Label>
+                    </children>
+                </AnchorPane>
+            </items>
+        </SplitPane>
+        <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="NEVER">
+            <children>
+                <Label maxHeight="1.7976931348623157E308" maxWidth="-1.0" text="Left status" HBox.hgrow="ALWAYS">
+                    <font>
+                        <Font size="11.0" fx:id="x3" />
+                    </font>
+                    <textFill>
+                        <Color blue="0.625" green="0.625" red="0.625" fx:id="x4" />
+                    </textFill>
+                </Label>
+                <Pane prefHeight="-1.0" prefWidth="-1.0" HBox.hgrow="ALWAYS" />
+                <Label font="$x3" maxWidth="-1.0" text="Right status" textFill="$x4" HBox.hgrow="NEVER" />
+            </children>
+            <padding>
+                <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+            </padding>
+        </HBox>
+    </children>
+</VBox>
