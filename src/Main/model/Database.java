@@ -316,7 +316,6 @@ public class Database {
             for (Task task : tasks) {
                 if (done_num == UNDONE) {
                     if (task.getDone() != UNDONE) {
-                        System.out.println("run");
                         rubbish.add(task);
                     }
                 } else {
@@ -392,6 +391,28 @@ public class Database {
             }
         }
 
+    }
+
+    private List<Task> searchTasksList(List<Task> tasks, String search) {
+        if (search.isBlank()) {
+            return tasks;
+        }
+        search = search.trim().toLowerCase();
+        StringBuilder builder = new StringBuilder();
+        ListIterator<Task> iterator = tasks.listIterator();
+        while (iterator.hasNext()) {
+            Task task = iterator.next();
+            builder.setLength(0);
+            builder.append(task.getDescription());
+            builder.append(task.getName());
+            builder.append(task.getClient());
+            builder.append(task.getDeadline());
+            builder.append(task.getFee());
+            if (!builder.toString().toLowerCase().contains(search)) {
+                iterator.remove();
+            }
+        }
+        return tasks;
     }
 
     private List<EmpUser> searchEmpUserList(List<EmpUser> users, String searchInput) {
@@ -617,6 +638,7 @@ public class Database {
             if (affectedRow != 1) {
                 throw new SQLException("there is more than 1 record with that id!");
             }
+            conn.commit();
             result = true;
         } catch (SQLException e) {
             try {
@@ -813,6 +835,155 @@ public class Database {
             }
         }
         return false;
+    }
+
+    public boolean updateDetails(int id, String name, String email, int phone, String skills) {
+        String sql = "UPDATE employees set name = ?, email = ?, phone = ?, skill_set = ? where user_id = ?";
+        boolean rs = false;
+        try {
+            conn.setAutoCommit(false);
+            statement = conn.prepareStatement(sql);
+            statement.setString(1, name);
+            statement.setString(2, email);
+            statement.setInt(3, phone);
+            statement.setString(4, skills);
+            statement.setInt(5, id);
+            int a = statement.executeUpdate();
+            if (a != 1) {
+                throw new SQLException("more than 1 row updated");
+            } else {
+                conn.commit();
+            }
+            rs = true;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage() + "error updating");
+            try {
+                conn.rollback();
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage() + "rollback failed");
+                ex.printStackTrace();
+            }
+        } finally {
+            try {
+                conn.setAutoCommit(true);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return rs;
+    }
+
+    public List<Task> findCompletedTasksByEmployee(int id, String search) {
+
+        List<Task> tasks = findAssignedTasksByEmployee(id, Database.DONE);
+
+        return searchTasksList(tasks, search);
+    }
+
+    public int countDoneTasks(int userID) {
+        List<Task> tasks = findCompletedTasksByEmployee(userID, "");
+        return tasks.size();
+    }
+
+    public int totalPay(int userID) {
+        List<Task> tasks = findCompletedTasksByEmployee(userID, "");
+        int totalPay = 0;
+        for (Task task : tasks) {
+            totalPay += task.getFee();
+        }
+        return totalPay;
+    }
+
+    public int countAssigns(int userID) {
+        String sql2 = "SELECT Count(*) as total from tasks_by_user where assigned_user = ?";
+
+        int total = 0;
+        try {
+            statement = conn.prepareStatement(sql2);
+            statement.setInt(1, userID);
+            ResultSet resultSet = statement.executeQuery();
+            total = resultSet.getInt("total");
+        } catch (SQLException e) {
+            System.out.println("error: " + e.getMessage());
+        }
+        return total;
+    }
+
+    public int countProposals(int userID) {
+        String sql2 = "SELECT Count(*) as total from task_fee where user_id = ?";
+        int total = 0;
+        try {
+            statement = conn.prepareStatement(sql2);
+            statement.setInt(1, userID);
+            ResultSet resultSet = statement.executeQuery();
+            total = resultSet.getInt("total");
+        } catch (SQLException e) {
+            System.out.println("error: " + e.getMessage());
+        }
+        return total;
+    }
+
+    public List<Task> findAssignedTasksByEmployee(int id, int undone, String search) {
+        List<Task> tasks = findAssignedTasksByEmployee(id, undone);
+
+        return searchTasksList(tasks, search);
+    }
+
+    public List<Task> getAllUnAssTasks(String search) {
+        List<Task> tasks = getAllUnAssTasks();
+        return searchTasksList(tasks, search);
+    }
+    public List<Task> getAllUnAssTasks() {
+        String sql = "SELECT * from tasks inner join clients on tasks.client = clients.client_id where tasks.name != '*removed' and tasks.assigned_to_user = 0";
+        List<Task> tasks = new ArrayList<>();
+        try {
+            st = conn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                Task task = new Task();
+
+                // set number of candidate for the task:
+                String sql2 = "SELECT Count(*) as total from task_fee where task_id = ?";
+                statement = conn.prepareStatement(sql2);
+                statement.setInt(1, rs.getInt(1));
+                ResultSet resultSet = statement.executeQuery();
+                int total = resultSet.getInt("total");
+                task.setNumOfPendingEmps(total);
+
+                task.setDone(0);
+                task.setFee(0);
+                task.setClient(rs.getString(8));
+                task.setDeadline(rs.getString(6));
+                task.setName(rs.getString(2));
+                task.setId(rs.getInt(1));
+                task.setAssignedUser(rs.getInt(5)); // is 0
+                tasks.add(task);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            tasks = null;
+        }
+        return tasks;
+    }
+
+    public boolean proposeFee(int id, int userID, int fee, String comment) {
+        String sql = "INSERT INTO task_fee(task_id, user_id, fee, comment) values (?,?,?,?)";
+        boolean rs = false;
+        try {
+            statement = conn.prepareStatement(sql);
+            statement.setInt(1, id);
+            statement.setInt(2, userID);
+            statement.setInt(3, fee);
+            statement.setString(4, comment);
+            int a =statement.executeUpdate();
+            if (a != 1) {
+                throw new SQLException("could not insert fee proposal into DB");
+            }
+            rs = true;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return rs;
     }
 }
 

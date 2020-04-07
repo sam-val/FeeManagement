@@ -8,7 +8,8 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 
-<HBox fx:id="itemC" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="53.0" prefWidth="695.0" spacing="80.0" style="-fx-background-color: #02030A; -fx-background-radius: 5; -fx-background-insets: 0;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<HBox fx:id="itemC" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="53.0" prefWidth="695.0" spacing="30.0" style="-fx-background-color: #02030A; -fx-background-radius: 5; -fx-background-insets: 0;"
+xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Main.Controller.ItemController">
     <children>
         <ImageView fitHeight="31.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
             <image>
@@ -18,23 +19,26 @@
                 <Insets left="10.0" />
             </HBox.margin>
         </ImageView>
-        <Label text="KeepToo" textFill="#b7c3d7" />
-        <Label text="JFK" textFill="#b7c3d7">
+        <Label fx:id="taskNameLabel" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="16.0" prefWidth="114.0" text="name" textFill="#b7c3d7">
+         <HBox.margin>
+            <Insets />
+         </HBox.margin></Label>
+        <Label fx:id="clientLabel" prefHeight="16.0" prefWidth="151.0" text="client" textFill="#b7c3d7">
             <HBox.margin>
                 <Insets />
             </HBox.margin>
         </Label>
-        <Label text="10/11/2018" textFill="#b7c3d7">
+        <Label fx:id="deadlineLabel" prefHeight="16.0" prefWidth="108.0" text="dline" textFill="#b7c3d7">
             <HBox.margin>
                 <Insets />
             </HBox.margin>
         </Label>
-        <Label text="\$200" textFill="#b7c3d7">
+        <Label fx:id="proposalsLabel" prefHeight="16.0" prefWidth="59.0" text="proposals" textFill="#b7c3d7">
             <HBox.margin>
                 <Insets />
             </HBox.margin>
         </Label>
-        <Button mnemonicParsing="false" prefHeight="10.0" prefWidth="60.0" style="-fx-border-color: #2A73FF; -fx-border-radius: 20; -fx-background-color: transparent;" stylesheets="@style.css" text="active">
+        <Button fx:id="moreBtn" mnemonicParsing="false" prefHeight="28.0" prefWidth="83.0" style="-fx-border-color: #2A73FF; -fx-border-radius: 20; -fx-background-color: transparent;" stylesheets="@../css/style.css" text="more...">
             <HBox.margin>
                 <Insets />
             </HBox.margin>

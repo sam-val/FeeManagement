@@ -84,6 +84,42 @@ public class DatabaseController {
         return db.assignUserToTask(user_id, task_id, fee);
     }
 
+    public static boolean updateDetails(int id, String name, String email, int phone, String skills) {
+        return db.updateDetails(id, name, email, phone, skills);
+    }
+
+    public static List<Task> findCompletedTasksByEmployee(int id, String search) {
+        return db.findCompletedTasksByEmployee(id, search);
+    }
+
+    public static int countDoneTasks(int userID) {
+        return db.countDoneTasks(userID);
+    }
+
+    public static int totalPay(int id) {
+        return db.totalPay(id);
+    }
+
+    public static int countProposals(int id) {
+        return db.countProposals(id);
+    }
+
+    public static List<Task> findAssignedTasksByEmployee(int id, int undone, String search) {
+        return db.findAssignedTasksByEmployee(id, undone, search);
+    }
+
+    public static int countAssTasks(int id) {
+        return db.countAssigns(id);
+    }
+
+    public static List<Task> getAllUnAssTasks(String search) {
+        return db.getAllUnAssTasks(search);
+    }
+
+    public static boolean proposeFee(int id, int userID, int fee, String comment) {
+        return db.proposeFee(id, userID, fee, comment);
+    }
+
     public void connect() {
         db.connect();
     }

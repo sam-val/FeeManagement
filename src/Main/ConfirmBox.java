@@ -68,7 +68,9 @@ public class ConfirmBox {
         root.setSpacing(20);
         root.getChildren().addAll(border, grid);
 
-        window.setScene(new Scene(root, 400,200));
+        Scene scene = new Scene(root, 400, 200);
+        scene.getStylesheets().add("Main/css/style.css");
+        window.setScene(scene);
 
         window.showAndWait();
         return answer;

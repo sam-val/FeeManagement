@@ -6,43 +6,23 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
-<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Controller.AdminController">
+<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml" fx:controller="Main.Controller.AdminController">
     <children>
         <MenuBar VBox.vgrow="NEVER">
             <menus>
-                <Menu mnemonicParsing="true" text="_File">
+                <Menu mnemonicParsing="true" text="_Menu">
                     <items>
                         <MenuItem accelerator="Shortcut+E" mnemonicParsing="false" onAction="#newEmp" text="New Employee..." />
                         <MenuItem accelerator="Shortcut+C" mnemonicParsing="false" onAction="#manageClient" text="Manage Client..." />
-                        <Menu mnemonicParsing="false" text="Open Recent" />
-                        <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" text="Close" />
-                        <MenuItem mnemonicParsing="false" text="Save" />
-                        <MenuItem mnemonicParsing="false" text="Save As…" />
-                        <MenuItem mnemonicParsing="false" text="Revert" />
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem accelerator="ShortCut+O" mnemonicParsing="false" onAction="#userLogOut" text="Log Out" />
-                        <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem fx:id="quitMenuItem" accelerator="ShortCut+X" mnemonicParsing="false" onAction="#quitApp" text="Quit" />
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
+                <Menu mnemonicParsing="true" text="_Help">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Undo" />
-                        <MenuItem mnemonicParsing="false" text="Redo" />
-                        <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" text="Cut" />
-                        <MenuItem mnemonicParsing="false" text="Copy" />
-                        <MenuItem mnemonicParsing="false" text="Paste" />
-                        <MenuItem mnemonicParsing="false" text="Delete" />
-                        <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" text="Select All" />
-                        <MenuItem mnemonicParsing="false" text="Unselect All" />
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+                        <MenuItem mnemonicParsing="false" text="About The App" onAction="#info" />
                     </items>
                 </Menu>
             </menus>

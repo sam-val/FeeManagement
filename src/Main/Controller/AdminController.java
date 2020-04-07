@@ -659,6 +659,10 @@ public class AdminController implements Initializable {
         System.out.println(deadline);
     }
 
+    public void info(ActionEvent event) {
+        AlertBox.display("by Sam Val", "Info");
+    }
+
 //    public void setApprove(int id) {
 //        final EmpUser emp = (EmpUser) pendingTable.getSelectionModel().getSelectedItem();
 //        if (emp == null) {

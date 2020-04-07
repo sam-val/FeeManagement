@@ -19,6 +19,7 @@ public class test extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+
         window = stage;
         ChoiceBox<User> choices =new ChoiceBox<>();
         List<User> users = new ArrayList<>();
