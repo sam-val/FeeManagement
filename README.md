@@ -18,5 +18,6 @@ set task đó "hoàn thành" khi admin xác nhận "OK" với client.
 -Nhân viên cò thể update thông tin của mình, search tasks, đề nghị lương cho từng task. Tài khoản của họ phải được approved
 bởi admin trước tiên để đăng nhập.
 
+-Giao diện window của nhân viên được lấy và chỉnh sửa từ: https://github.com/k33ptoo/RestaurantMgtSampleUI 
 
 
