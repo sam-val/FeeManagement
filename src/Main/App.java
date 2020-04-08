@@ -50,9 +50,15 @@ public class App extends Application {
         try {
             LoginController login = (LoginController) changeScene("fxml/login.fxml", "Log In");
             login.setApplication(this);
+            minSize();
         } catch (Exception ex) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    private void setSize(int i, int i1) {
+        window.setWidth(i);
+        window.setHeight(i1);
     }
 
     public void goToEmployee() {
@@ -78,7 +84,6 @@ public class App extends Application {
     public void logOut() {
         loggedUser = null;
         goToLogin();
-        minSize();
     }
 
     public Initializable changeScene(String fxml, String title) throws IOException {
