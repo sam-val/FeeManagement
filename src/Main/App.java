@@ -50,7 +50,6 @@ public class App extends Application {
         try {
             LoginController login = (LoginController) changeScene("fxml/login.fxml", "Log In");
             login.setApplication(this);
-            minSize();
         } catch (Exception ex) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
         }
@@ -65,7 +64,6 @@ public class App extends Application {
         try {
             EmployeeController employee = (EmployeeController) changeScene("fxml/employee.fxml", "Employee Window");
             employee.setApplication(this);
-            minSize();
         } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, e);
         }
@@ -75,7 +73,6 @@ public class App extends Application {
         try {
             AdminController admin = (AdminController) changeScene("fxml/admin_s.fxml", "Admin Window");
             admin.setApp(this);
-            minSize();
         } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, e);
         }
