@@ -8,6 +8,8 @@ có lương đề nghị phù hợp cho từng task rồi chia công việc.
 
 -Database: sữ dụng sqlite3. Driver và data chưá trong thư mục DatabaseResource.
 
+- Sữ dụng library JavaFX (để chạy programme add các file ".jar" trong "DatabaseResource/javafx-sdk/lib" vào project cũa bạn)
+
 -đăng nhập bằng admin (username:admin ; password: 123) HOẶC tự tạo tài khoản HOẶC xài tài khoản nhân viên mẫu
 (username: yaiba ; password: 123).
 
@@ -18,5 +20,6 @@ set task đó "hoàn thành" khi admin xác nhận "OK" với client.
 -Nhân viên cò thể update thông tin của mình, search tasks, đề nghị lương cho từng task. Tài khoản của họ phải được approved
 bởi admin trước tiên để đăng nhập.
 
+-Giao diện window của nhân viên được lấy và chỉnh sửa từ: https://github.com/k33ptoo/RestaurantMgtSampleUI 
 
 
